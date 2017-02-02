@@ -1,3 +1,5 @@
+#makefile
+
 KT: driver.o Knight.o
 	g++ driver.o Knight.o -o KT
 
