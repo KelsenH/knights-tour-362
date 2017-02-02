@@ -83,6 +83,6 @@ class Knight
     //Y Position
     int y_position_;
 
-}
+};
 
 #endif

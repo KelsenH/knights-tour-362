@@ -31,7 +31,7 @@ Knight::Knight (int x_position, int y_position)
 //Destructor
 Knight::~Knight (void)
 {
-  delete this;
+  //delete this;
 }
 
 /* Set the x_position of the knight
