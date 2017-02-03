@@ -31,9 +31,6 @@ class Knight
      */
     Knight (int x_position, int y_position);
 
-    //Destructor
-    ~Knight (void);
-
     /**
      * Sets the x position of the knight
      * Makes sure it is not negative or greater
@@ -83,6 +80,6 @@ class Knight
     //Y Position
     int y_position_;
 
-}
+};
 
 #endif

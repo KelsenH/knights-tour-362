@@ -28,12 +28,6 @@ Knight::Knight (int x_position, int y_position)
 
 }
 
-//Destructor
-Knight::~Knight (void)
-{
-  delete this;
-}
-
 /* Set the x_position of the knight
  * Checks to make sure it is within the bounds of the board
  */
