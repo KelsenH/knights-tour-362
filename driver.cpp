@@ -11,7 +11,11 @@ int main ()
   Stack <Board> stack;
   stack.push (board);
   int num_of_moves = 0;
+  board.getPossibleMoves ();
+  board.warnsdoff ();
+  stack.push (board);
   
+  /*
   while (num_of_moves < 52)
   {
     while (board.getPossibleMoves () && board.choose_move())
@@ -27,6 +31,6 @@ int main ()
       std::cout << "Here" << std::endl;
     } 
     num_of_moves = board.get_knight_moves ();
-  }
+  } */
   return 0;
 }

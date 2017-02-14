@@ -12,7 +12,7 @@
 
 #include <iostream>
 #include "Knight.h"
-
+#include <vector>
 /**
  * @class Board
  *
@@ -97,7 +97,7 @@ class Board
       int possible_move_amt;
       
       //Holds row of chosen moves
-      int chosen_moves [8];
+      std::vector <int> chosen_moves;
 
       int chosen_move_amt;
 

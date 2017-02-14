@@ -10,7 +10,7 @@
 //
 template <typename T>
 Stack <T>::Stack (void)
-: topOfStack (nullptr)
+: topOfStack (0)
 {
   
 }
@@ -20,7 +20,7 @@ Stack <T>::Stack (void)
 //
 template <typename T>
 Stack <T>::Stack (const Stack & stack)
-: topOfStack (nullptr)
+: topOfStack (0)
 {
   if (this -> is_empty())
   {
@@ -34,7 +34,7 @@ Stack <T>::Stack (const Stack & stack)
     {
       this -> push (topOfStack -> getData ());
       cur_node = cur_node -> getNextNode ();
-      if (cur_node == nullptr)
+      if (cur_node == 0)
       {
         keep_going = false;
       }
@@ -91,7 +91,7 @@ const Stack <T> & Stack <T>::operator = (const Stack & rhs)
   {
     this -> push (topOfStack -> getData ());
     cur_node = cur_node -> getNextNode ();
-    if (cur_node == nullptr)
+    if (cur_node == 0)
     {
       keep_going = false;
     }
@@ -105,5 +105,5 @@ template <typename T>
 void Stack <T>::clear (void)
 {
   delete topOfStack;
-  topOfStack = nullptr;
+  topOfStack = 0;
 }

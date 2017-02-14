@@ -117,19 +117,48 @@ bool Board::warnsdoff (void)
   int starting_x = knight.get_x_pos ();
   int starting_y = knight.get_y_pos ();
   int starting_possible_moves = possible_move_amt;
+  int chosen_move;
+  int chosen_move_move_amt = 100;
+
   //For each possible move
-  for (int i = 0; i < possible_move_amt; i ++)
+  for (int i = 0; i < starting_possible_moves; i ++)
   {
-    for (int j = 0; i < chosen_move_amt; i++)
+    bool already_chosen = false;
+    for (int j = 0; j < chosen_move_amt; j ++)
+    {
+      if (chosen_moves [j] == i)
       {
-        if (chosen_moves[j] != i)  
+        already_chosen = true;
       }
+    }
+    if (!already_chosen)
+    {
+      moveKnight (possible_moves [i][0], possible_moves [i][1]);
+      getPossibleMoves ();
+      int test_move_amt = possible_move_amt;
+      if (test_move_amt < chosen_move_move_amt)
+      {
+        chosen_move = i;
+        chosen_move_move_amt = possible_move_amt;
+      }
+    }
       //Move the knight to that location and check for
       //amt of possible moves.
       //Whichever has the lowest, that is the square we should
       //choose to go to
   }
+  
+  moveKnight (starting_x, starting_y);
+  getPossibleMoves ();
+  int x_move = possible_moves [chosen_move][0];
+  int y_move = possible_moves [chosen_move][1];
+  moveKnight (x_move, y_move);
+  board [starting_x][starting_y] = knight_moves;
+  knight_moves ++;
   //Put index of that move in chosen moves array
+  chosen_moves.push_back (chosen_move);
+  possible_move_amt = starting_possible_moves;
+  printBoard ();
 }
 
 bool Board::choose_move (void)

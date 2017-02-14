@@ -33,7 +33,7 @@ template <typename T>
 inline
 bool Stack <T>::is_empty (void) const
 {
-  if (topOfStack == nullptr)
+  if (topOfStack == 0)
   {
     return true;
   }
