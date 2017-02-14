@@ -36,7 +36,7 @@ Board::Board (int x_position, int y_position)
 * of the board. The y values should be negative, but for
 * simplicity's sake, I chose not to write it that way'
 */
-void Board::getPossibleMoves (void)
+bool Board::getPossibleMoves (void)
 {
   int x [8] = {1,2,2,1,-1,-2,-2,-1};
   int y [8] = {2,1,-1,-2,-2,-1,1,2};
@@ -48,10 +48,11 @@ void Board::getPossibleMoves (void)
   {
     int test_x = cur_x + x [i];
     int test_y = cur_y + y [i];
-    if (test_x < 8 && test_y < 8)
+    if ((test_x < 8 && test_x >= 0) && (test_y < 8 && test_y >=0))
     {
       if (board [test_x][test_y] == 0)
       {
+        //std::cout << "Potential Move: " << test_x << " " << test_y << std::endl;
         possible_moves [possible_move_counter] [0] = test_x;
         possible_moves [possible_move_counter] [1] = test_y;
         possible_move_counter ++;
@@ -59,11 +60,20 @@ void Board::getPossibleMoves (void)
     }
   }
   possible_move_amt = possible_move_counter;
+  if (possible_move_counter == 0)
+  {
+    return false;
+  }
+  else
+  {
+    //std::cout << "Current Possible Moves: " << possible_move_amt << std::endl;
+    return true;
+  }
 }
 
 void Board::moveKnight (int x_position, int y_position)
 {
-    knight.set_pos (x_position, y_position);
+  knight.set_pos (x_position, y_position);
 }
 
 /**
@@ -78,11 +88,18 @@ void Board::printBoard (void)
       {
         if (i == knight.get_x_pos() && j == knight.get_y_pos()) 
         {
-          std::cout << "K ";
+          std::cout << "K  ";
         }
         else
         {
-            std::cout << board [i][j] << " ";
+          if (board[i][j] > 9)
+            {
+              std::cout << board [i][j] << " ";
+            }
+          else
+          {
+            std::cout << board [i][j] << "  ";
+          }
         } 
       }
     std::cout << std::endl;
@@ -95,13 +112,29 @@ void Board::printBoard (void)
  * from each potential move. Choose the move with the least amount
  * of places to go from it. 
  */
-void Board::warnsdoff (void) 
+bool Board::warnsdoff (void) 
 {
-  
+  int starting_x = knight.get_x_pos ();
+  int starting_y = knight.get_y_pos ();
+  int starting_possible_moves = possible_move_amt;
+  //For each possible move
+  for (int i = 0; i < possible_move_amt; i ++)
+  {
+    for (int j = 0; i < chosen_move_amt; i++)
+      {
+        if (chosen_moves[j] != i)  
+      }
+      //Move the knight to that location and check for
+      //amt of possible moves.
+      //Whichever has the lowest, that is the square we should
+      //choose to go to
+  }
+  //Put index of that move in chosen moves array
 }
 
 bool Board::choose_move (void)
 {
+  //std::cout << "Chosen move amount: " << chosen_move_amt << std::endl;
   if (chosen_move_amt >= possible_move_amt)
   {
     return false;
@@ -116,10 +149,6 @@ bool Board::choose_move (void)
     knight_moves ++;
     printBoard ();
   }
-  if (chosen_move_amt >= possible_move_amt)
-  {
-    return false;
-  }
   return true;
 }
 
@@ -132,9 +161,4 @@ void Board::reset (void)
             board[i][j] = 0;
         }
     }
-}
-
-void Board::reset_chosen_move_amt (void)
-{
-  chosen_move_amt = 0;
 }

@@ -37,7 +37,7 @@ class Board
        * knight moves. If the space has already been visited
        * or is off of the board, they are not included.
        */
-      void getPossibleMoves (void);
+      bool getPossibleMoves (void);
 
       /**
        * Moves the knight to specified x and y 
@@ -61,7 +61,7 @@ class Board
       * Warndoff's heuristic for choosing the next place
       * chooses place with least amount of next possible moves
       */
-      void warnsdoff (void);
+      bool warnsdoff (void);
 
       /**
       * Chooses first available move from possible moves
@@ -75,7 +75,15 @@ class Board
       */
       void reset (void);
 
-      void reset_chosen_move_amt (void);
+      void reset_chosen_move_amt (void)
+      {
+        chosen_move_amt = 0;
+      }
+
+      int get_knight_moves (void) 
+      {
+        return knight_moves;
+      }
 
     private:
       //Board matrix
