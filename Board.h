@@ -1,7 +1,7 @@
 //=============================================================
 /**
  * Board.h
- * 2017-02-02 016:19
+ * 2017-02-02 16:19
  * KelsenH
  *
  */
@@ -61,13 +61,21 @@ class Board
       * Warndoff's heuristic for choosing the next place
       * chooses place with least amount of next possible moves
       */
-      void warndoff (void);
+      void warnsdoff (void);
+
+      /**
+      * Chooses first available move from possible moves
+      * Executes the movement of the knight, and marks the spot
+      */
+      bool choose_move (void);
 
       /**
       * Reset all board values to 0
       * Also can be used to initialize board
       */
       void reset (void);
+
+      void reset_chosen_move_amt (void);
 
     private:
       //Board matrix
@@ -77,9 +85,16 @@ class Board
       
       //2d array of possible moves
       int possible_moves [8][2];
+
+      int possible_move_amt;
       
       //Holds row of chosen moves
       int chosen_moves [8];
+
+      int chosen_move_amt;
+
+      //Amount of moves knight has made
+      int knight_moves;
 
 };
 

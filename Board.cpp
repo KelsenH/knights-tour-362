@@ -11,13 +11,17 @@
 
 //Default constructor
 Board::Board (void) 
+: knight_moves (0),
+  chosen_move_amt (0)
 {
   this -> reset ();
 }
 
 //Knight position constructor
 Board::Board (int x_position, int y_position)
-:knight (x_position, y_position)
+: knight (x_position, y_position),
+  knight_moves (0),
+  chosen_move_amt (0)
 {
   this -> reset ();
 }
@@ -27,6 +31,10 @@ Board::Board (int x_position, int y_position)
 * Iterates over the potential moves of the knight
 * if they are on the board and have not been visited yet,
 * they are put into the 2d possible_moves array
+*
+* Note that the 0,0 position is actually the top, left
+* of the board. The y values should be negative, but for
+* simplicity's sake, I chose not to write it that way'
 */
 void Board::getPossibleMoves (void)
 {
@@ -50,6 +58,7 @@ void Board::getPossibleMoves (void)
       }
     }
   }
+  possible_move_amt = possible_move_counter;
 }
 
 void Board::moveKnight (int x_position, int y_position)
@@ -78,11 +87,40 @@ void Board::printBoard (void)
       }
     std::cout << std::endl;
   }
+  std::cout << std::endl << std::endl;
 }
 
-void Board::warndoff (void) 
+/**
+ * Choosing a move based upon possible how many moves are possible
+ * from each potential move. Choose the move with the least amount
+ * of places to go from it. 
+ */
+void Board::warnsdoff (void) 
 {
+  
+}
 
+bool Board::choose_move (void)
+{
+  if (chosen_move_amt >= possible_move_amt)
+  {
+    return false;
+  }
+  else
+  {
+    int x_move = possible_moves [chosen_move_amt][0];
+    int y_move = possible_moves [chosen_move_amt][1];
+    board [knight.get_x_pos()][knight.get_y_pos()] = knight_moves;
+    knight.set_pos (x_move, y_move);
+    chosen_move_amt ++;
+    knight_moves ++;
+    printBoard ();
+  }
+  if (chosen_move_amt >= possible_move_amt)
+  {
+    return false;
+  }
+  return true;
 }
 
 void Board::reset (void)
@@ -94,4 +132,9 @@ void Board::reset (void)
             board[i][j] = 0;
         }
     }
+}
+
+void Board::reset_chosen_move_amt (void)
+{
+  chosen_move_amt = 0;
 }
