@@ -85,6 +85,16 @@ class Board
         return knight_moves;
       }
 
+      int get_possible_move_amt (void)
+      {
+        return possible_move_amt;
+      }
+
+      int get_chosen_move_amt (void)
+      {
+        return chosen_move_amt;
+      }
+
     private:
       //Board matrix
       int board [8][8];

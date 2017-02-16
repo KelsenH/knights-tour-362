@@ -142,12 +142,14 @@ bool Board::warnsdoff (void)
         chosen_move_move_amt = possible_move_amt;
       }
     }
-      //Move the knight to that location and check for
-      //amt of possible moves.
-      //Whichever has the lowest, that is the square we should
-      //choose to go to
+   moveKnight (starting_x, starting_y);
+   getPossibleMoves ();
   }
   
+  //Move the knight to that location and check for
+  //amt of possible moves.
+  //Whichever has the lowest, that is the square we should
+  //choose to go to
   moveKnight (starting_x, starting_y);
   getPossibleMoves ();
   int x_move = possible_moves [chosen_move][0];

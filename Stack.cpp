@@ -48,7 +48,7 @@ Stack <T>::Stack (const Stack & stack)
 template <typename T>
 Stack <T>::~Stack (void)
 {
-  delete [] topOfStack;
+  delete topOfStack;
 }
 
 //

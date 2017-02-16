@@ -8,29 +8,38 @@
 int main ()
 {
   Board board;
+  board.moveKnight (4,4);
   Stack <Board> stack;
   stack.push (board);
   int num_of_moves = 0;
-  board.getPossibleMoves ();
-  board.warnsdoff ();
-  stack.push (board);
   
-  /*
-  while (num_of_moves < 52)
+  for (int i = 0; i < 40; i ++)
   {
-    while (board.getPossibleMoves () && board.choose_move())
+    board.getPossibleMoves ();
+    board.warnsdoff ();
+    stack.push (board);
+  }
+  
+  board.getPossibleMoves ();
+  
+  while (num_of_moves < 64)
+  {
+    if (board.choose_move ())
     {
+      board.getPossibleMoves ();
       stack.push (board);
-      board.reset_chosen_move_amt();
+      board.reset_chosen_move_amt ();
     }
-    
-    while (!(board.getPossibleMoves ()))
+    else 
     {
       stack.pop ();
       board = stack.top ();
-      std::cout << "Here" << std::endl;
-    } 
+      board.printBoard ();
+    }
     num_of_moves = board.get_knight_moves ();
-  } */
+    board.getPossibleMoves ();
+  } 
   return 0;
 }
+
+
