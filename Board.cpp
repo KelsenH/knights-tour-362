@@ -8,6 +8,7 @@
 //=====================================================
 
 #include "Board.h"
+#include <fstream>
 
 //Default constructor
 Board::Board (void) 
@@ -59,8 +60,8 @@ bool Board::getPossibleMoves (void)
       }
     }
   }
-  possible_move_counter = possible_move_counter - chosen_move_amt;
-  if (possible_move_counter <= 0)
+  possible_move_amt = possible_move_counter - chosen_move_amt;
+  if (possible_move_amt <= 0)
   {
     return false;
   }
@@ -105,6 +106,36 @@ void Board::printBoard (void)
     std::cout << std::endl;
   }
   std::cout << std::endl << std::endl;
+}
+
+void Board::writeBoard (std::string fileName)
+{
+  std::ofstream file;
+  file.open (fileName);
+  for (int i = 0; i < 8; i++)
+  {
+      for (int j = 0; j < 8; j++)
+      {
+        if (i == knight.get_x_pos() && j == knight.get_y_pos()) 
+        {
+          file << "K  ";
+        }
+        else
+        {
+          if (board[i][j] > 9)
+            {
+              file << board [i][j] << " ";
+            }
+          else
+          {
+            file << board [i][j] << "  ";
+          }
+        } 
+      }
+    file << std::endl;
+  }
+  file << std::endl << std::endl;
+  file.close ();
 }
 
 /**
