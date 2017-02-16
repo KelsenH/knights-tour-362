@@ -3,7 +3,7 @@
 #include "Board.h"
 #include "Stack.h"
 
-//#include <iostream>
+#include <iostream>
 
 int main ()
 {
@@ -13,32 +13,42 @@ int main ()
   stack.push (board);
   int num_of_moves = 0;
   
-  for (int i = 0; i < 40; i ++)
+  for (int i = 0; i < 32; i ++)
   {
     board.getPossibleMoves ();
     board.warnsdoff ();
     stack.push (board);
+    num_of_moves = board.get_knight_moves ();
+    std::cout << "Current move amt: " << num_of_moves << std::endl;
   }
   
-  board.getPossibleMoves ();
   
-  while (num_of_moves < 64)
+  for (int j = 0; j < 1; j ++)
   {
-    if (board.choose_move ())
+    if (board.getPossibleMoves ())
     {
-      board.getPossibleMoves ();
-      stack.push (board);
-      board.reset_chosen_move_amt ();
+      if (board.choose_move ())
+      {
+        stack.push (board);
+        board.make_move ();
+        board.reset_chosen_move_amt ();
+      }
+      else 
+      {
+        board = stack.top ();
+        stack.pop();
+      }
     }
-    else 
+    else
     {
-      stack.pop ();
       board = stack.top ();
-      board.printBoard ();
+      stack.pop ();
     }
+    
+    board.printBoard ();
     num_of_moves = board.get_knight_moves ();
-    board.getPossibleMoves ();
-  } 
+    //std::cout << "Current move amt: " << num_of_moves << std::endl;
+  }   
   return 0;
 }
 

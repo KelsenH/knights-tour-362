@@ -11,7 +11,7 @@
 
 //Default constructor
 Board::Board (void) 
-: knight_moves (0),
+: knight_moves (1),
   chosen_move_amt (0)
 {
   this -> reset ();
@@ -20,7 +20,7 @@ Board::Board (void)
 //Knight position constructor
 Board::Board (int x_position, int y_position)
 : knight (x_position, y_position),
-  knight_moves (0),
+  knight_moves (1),
   chosen_move_amt (0)
 {
   this -> reset ();
@@ -59,8 +59,8 @@ bool Board::getPossibleMoves (void)
       }
     }
   }
-  possible_move_amt = possible_move_counter;
-  if (possible_move_counter == 0)
+  possible_move_counter = possible_move_counter - chosen_move_amt;
+  if (possible_move_counter <= 0)
   {
     return false;
   }
@@ -172,15 +172,21 @@ bool Board::choose_move (void)
   }
   else
   {
-    int x_move = possible_moves [chosen_move_amt][0];
-    int y_move = possible_moves [chosen_move_amt][1];
-    board [knight.get_x_pos()][knight.get_y_pos()] = knight_moves;
-    knight.set_pos (x_move, y_move);
     chosen_move_amt ++;
-    knight_moves ++;
-    printBoard ();
   }
   return true;
+}
+
+void Board::make_move (void)
+{
+  int x_move = possible_moves [chosen_move_amt-1][0];
+  int y_move = possible_moves [chosen_move_amt-1][1];
+  std::cout << "Chosen move amt for pos: "<< chosen_move_amt << std::endl;
+  std::cout << "Possible move amt for pos: " << possible_move_amt << std::endl;
+  board [knight.get_x_pos()][knight.get_y_pos()] = knight_moves;
+  knight.set_pos (x_move, y_move);
+  knight_moves ++;
+  //printBoard ();
 }
 
 void Board::reset (void)

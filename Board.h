@@ -95,6 +95,8 @@ class Board
         return chosen_move_amt;
       }
 
+      void make_move (void);
+
     private:
       //Board matrix
       int board [8][8];
